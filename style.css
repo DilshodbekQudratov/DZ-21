@@ -75,7 +75,7 @@ main{
     grid-template-rows: repeat(8, 30px);
     gap: 5px;
 }
-.ceil{
+.cell{
     background-color:var(--purple);
     border-radius: 5px
 }
@@ -127,15 +127,52 @@ main{
 input{
     display: none;
 }
-.ceil.active{
+.cell.active{
     background-color:var(--lighter-purple);
 }
-.ceil.active:not(.flag):hover{
+.cell.active:not(.flag):hover{
     opacity: 0.7;
 }
 
-.ceil.flag{
+.cell.flag{
     background-image: url(./img/photo_2024-07-19_21-12-27.jpg);
     background-size: cover;
     background-color:var(--green);
+}
+
+.exit {
+    color: var(--light-purple);
+    text-decoration: underline;
+    cursor: pointer;
+}
+.exit:hover{
+    color: var(--white);
+}
+
+.launch {
+    position: absolute;
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.launchForm {
+    background-color: var(--light-purple);
+    border: 5px solid var(--white);
+    border-radius: 20px;
+    padding: 20px 20px;
+}
+.launchForm h2 {
+    text-align: center;
+}
+.launchForm input {
+    margin-top: 15px;
+    background-color: var(--light-purple);
+    color: var(--purple);
+    outline: 0;
+    border: none;
+    width: 100%;
+    font-size: 24px;
+    border-radius: 5px;
+    padding: 5px;
 }
