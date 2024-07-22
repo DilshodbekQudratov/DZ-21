@@ -74,3 +74,4 @@ async function sendRequest(url, method, data) {
         return response
     }
 }
+
