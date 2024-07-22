@@ -1,0 +1,141 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing:border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+:root {
+    --purple: #1d2039;
+    --light-purple: #242947;
+    --lighter-purple: #797e9a;
+    --green: #66A663;
+    --white: #fff;
+    --orange: #dbac36;
+}
+body{
+    background-color: var(--purple);
+    padding: 15px;
+    color: white;
+}
+h1{
+    text-transform: uppercase;
+}
+h2{
+    text-transform: uppercase;
+    text-align: center;
+    margin-top: 30px;
+}
+span{
+    opacity: 0.5;
+}
+header{
+    display: flex;
+    flex-grow: 1;
+    width: 100%;
+    padding: 20px;
+    border-radius: 30px;
+    background-color: var(--light-purple) ;
+    gap: 20px;
+    align-items: center;
+}
+.logo {
+    width: 100px;
+    height: 100px;
+}
+
+main{
+    display: flex;
+    margin-top: 15px;
+
+}
+
+.section1{
+    display: flex;
+    flex-grow: 9;
+    border-radius: 30px;
+    background-color: var(--light-purple) ;
+    padding: 10px;
+    justify-content:center;
+}
+.section2{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    flex-grow: 1;
+    border-radius: 30px;
+    background-color: var(--light-purple) ;
+    padding: 20px;
+    margin-left: 15px;
+    
+}
+.gameField{
+    display: grid;
+    grid-template-columns: repeat(10, 30px);
+    grid-template-rows: repeat(8, 30px);
+    gap: 5px;
+}
+.ceil{
+    background-color:var(--purple);
+    border-radius: 5px
+}
+.score{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr) ;
+    grid-template-rows: repeat(3, 1fr);
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+
+
+}
+.point{
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    background-color:var(--purple);
+    padding: 8px;
+    border-radius: 10px;
+    cursor: pointer;
+    height: 100%;
+
+}
+.point.active{
+    background-color:var(--orange);
+}
+
+#gameBtn{
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    background-color:var(--green);
+    padding: 15px;
+    border-radius: 60px;
+    height: 100%;
+    border: #66A663;
+    text-transform: uppercase;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.disabled-button{
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+input{
+    display: none;
+}
+.ceil.active{
+    background-color:var(--lighter-purple);
+}
+.ceil.active:not(.flag):hover{
+    opacity: 0.7;
+}
+
+.ceil.flag{
+    background-image: url(./img/photo_2024-07-19_21-12-27.jpg);
+    background-size: cover;
+    background-color:var(--green);
+}
