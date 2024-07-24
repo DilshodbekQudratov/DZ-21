@@ -9,6 +9,24 @@ document.getElementById('login').addEventListener('submit', function(event) {
 
 });
 
+checkLs()
+function checkLs() {
+    let login = localStorage.getItem('username')
+    if(login) {
+        USERNAME = login
+        launch.classList.add('disabled')
+        updateUserBalance()
+
+
+    }
+}
+document.querySelector('header .exit').addEventListener('click', exit)
+ function exit(){
+     localStorage.removeItem('username')
+     launch.classList.remove('disabled')
+ }
+ 
+
 async function updateUserBalance() {
     let response = await sendRequest("user", "GET", {
         username:USERNAME
@@ -77,4 +95,4 @@ async function auth(){
         localStorage.setItem('username', USERNAME)
     }
     }
-    
+  
