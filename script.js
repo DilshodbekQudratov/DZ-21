@@ -2,6 +2,10 @@
 
 
 let USERNAME 
+
+let game_id
+
+let points = 1000
 let launch = document.querySelector('.launch')
 document.getElementById('login').addEventListener('submit', function(event) {
     event.preventDefault();
@@ -96,3 +100,104 @@ async function auth(){
     }
     }
   
+
+ 
+document.querySelectorAll('.point').forEach((btn) => {
+    btn.addEventListener('click', setPoints)
+    
+});
+function setPoints(){
+    let userBtn = event.target
+    points = +userBtn.innerHTML
+    let activeBtn = document.querySelector('.point.active')
+    activeBtn.classList.remove('active')
+    userBtn.classList.add('active')
+    
+}
+
+/* document.querySelectorAll('.cell').forEach((btn) => {
+    btn.addEventListener('click', activeArea())
+}); */
+function activateArea() {
+    let cells = document.querySelectorAll(".cell")
+    cells.forEach( (cell, i) => {
+        setTimeout( () => {
+            cell.classList.add('active')
+            cell.addEventListener('contextmenu', (event) => {
+                event.preventDefault()
+                setFlag()
+            });
+        }, i * 15)
+    })
+}
+
+function setFlag(){
+    let cell = event.target
+    cell.classList.toggle('flag')
+} 
+
+/* function cleanArea(){
+    let gameField = document.querySelector('.gameField')
+    gameField.innerHTML = ""
+    for (let i = 0; i < 80; i++) {
+        gameField.innerHTML = gameField.innerHTML + `<div class="cell"></div>`
+    }
+} */
+
+    function cleanArea() {
+        const gameField = document.querySelector('.gameField');
+        gameField.innerHTML = ''; // Очищаем содержимое поля
+    
+        // Создаем и добавляем ячейки во фрагмент
+        for (let i = 0; i < 80; i++) {
+            const cell = document.createElement('div');
+            cell.classList.add('cell');
+            gameField.appendChild(cell);
+        }
+    }
+    
+    let gameBtn = document.getElementById("gameBtn")
+    gameBtn.addEventListener('click', startOrStopGame)
+    function startOrStopGame(){
+        let btnText = gameBtn.innerHTML
+        if(btnText == "ИГРАТЬ"){
+            startGame()
+
+            gameBtn.innerHTML = "ЗАКОНЧИТЬ ИГРУ"
+        } else {
+            stopGame() 
+
+            gameBtn.innerHTML = "ИГРАТЬ"
+        }
+    }
+     async function startGame() {
+        let response = await sendRequest('new_game', 'POST', {
+            'username': USERNAME,
+            points
+        })
+        if (response.error){
+            alert(response.message)
+            gameBtn.innerHTML = "ИГРАТЬ"
+        } else {
+            updateUserBalance()
+            game_id = response.game_id
+            console.log(game_id)
+            activateArea()
+        }
+        console.log('startGame')
+    }
+
+    async function stopGame() {
+        let response = await sendRequest('stop_game', 'POST', {
+            'username': USERNAME,
+            game_id
+        })
+        if (response.error){
+            alert(response.message)
+            gameBtn.innerHTML = "ЗАКОНЧИТЬ ИГРУ"
+        } else {
+            updateUserBalance()
+            cleanArea()
+        }
+        console.log('stopGame')
+    }
